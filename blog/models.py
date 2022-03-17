@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 class Post(models.Model):
     title = models.CharField(max_length=30)
@@ -8,6 +9,6 @@ class Post(models.Model):
     create_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    #모델 메소드 정의(오버라이드)
+    # 모델 메소드 정의(오버라이드)
     def __str__(self):
         return f'[{self.pk}]   [{self.title}]'

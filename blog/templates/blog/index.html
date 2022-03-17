@@ -1,10 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>blog</title>
 </head>
 <body>
-$END$
+    <h1>Blog</h1>
+
+{% for p in posts %}
+    <hr/>
+    <h2> {{ p.title }} : {{ p.pk }}</h2>
+    <h4> {{ p.create_at}}</h4>
+    <p>{{ p.content }}</p>
+
+{%  endfor %}
 </body>
 </html>
