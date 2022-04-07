@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from .models import Post, Category
 
@@ -40,3 +41,18 @@ class PostDetail(DetailView):
 #
 #
 #     return render(request, 'blog/post_detail.html', {'post':post})
+def cagegories_page(request, slug):
+    if slug=='no-category':
+        category='미분류'
+        post_list = Post.objects.filter(category=None)
+    else :
+        category = Category.objects.get(slug = slug)
+        post_list = Post.objects.filter(category = category)
+
+    context = {
+        'categories' : Category.objects.all(),
+        'category_less_post_count' : Post.objects.filter(category=None).count(),
+        'category' : category,
+        'post_list' : post_list
+    }
+    return render(request, 'blog/post_list.html', context)

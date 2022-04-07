@@ -74,12 +74,12 @@
                             <ul class="list-unstyled mb-0">
                                 {% for c in categories %}
                                     <li>
-                                        <a href="카테고리로 갈 링크">{{ c }} ({{ c.post_set.count }})</a>
+                                        <a href="{{ c.get_absolute_url }}">{{ c }} ({{ c.post_set.count }})</a>
 
                                     </li>
                                 {% endfor %}
                                     <li>
-                                        <a href="미분류로 갈 링크"> 미분류 ({{ category_less_post_count }})</a>
+                                        <a href="/blog/category/no-category"> 미분류 ({{ category_less_post_count }})</a>
                                     </li>
 
                             </ul>
