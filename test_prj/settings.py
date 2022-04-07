@@ -37,8 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'CloudProgramming_test.blog',
-    'CloudProgramming_test.single_page',
+    'blog',
+    'single_page',
     'django.contrib.admin'
 ]
 
