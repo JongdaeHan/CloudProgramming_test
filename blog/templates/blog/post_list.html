@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block main_area %}
-                <h1>Blog postings {% if category %} in {{ category.name }} {% endif %}</h1>
+                <h1>Blog postings {% if tag %}with tag : {{ tag.name }}{% endif %}{% if category %} in {{ category.name }} {% endif %}</h1>
 
                 {% for p in post_list %}
                 <!-- Blog Post -->
@@ -23,7 +23,19 @@
                         {% else %}
                             <p class="card-text">{{ p.content | truncatewords:30 }}</p>
                         {% endif %}
+
+
+
                         <a href="{{ p.get_absolute_url }}" class="btn btn-primary">Read More &rarr;</a>
+                        {% if p.tags.exists %}
+                            <br />
+                            <i class = "fas fa-tags"></i>
+                            {% for tag in p.tags.iterator %}
+                                <a href = {{ tag.get_absolute_url }}> {{ tag }}</a>
+                            {% endfor %}
+                            <br />
+                            <br />
+                        {% endif %}
                     </div>
                     <div class="card-footer text-muted">
                         Posted on {{ p.created_at}} by
