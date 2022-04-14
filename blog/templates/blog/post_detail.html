@@ -16,6 +16,12 @@
           by
           <a href="#">{{ post.author}}</a>
         </p>
+                {% if user.is_authenticated %}
+                    {% if user == post.author %}
+                        <a class="btn btn-info btn_sm float-right" href="/blog/update_post/{{ post.pk }}" role="button"><i class="fas fa-pen"></i>Edit Post</a>
+
+                    {% endif %}
+                {% endif %}
 
         <hr>
 
