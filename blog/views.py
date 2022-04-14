@@ -1,14 +1,24 @@
-from django.shortcuts import render
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, CreateView
 from .models import Post, Category, Tag
 
 
 # Create your views here.
 
-class PostCreate(CreateView):
+class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model=Post
     fields = ['title', 'content', 'head_image', 'file_upload', 'category']
 
+    def test_func(self):
+        return self.request.user.is_superuser or self.request.user.is_staff
+
+    def form_valid(self, form):
+        if self.request.user.is_authenticated and (self.request.user.is_superuser or self.request.user.is_staff) :
+            form.instance.author = self.request.user
+            return super(PostCreate, self).form_valid(form)
+        else:
+            return redirect('/blog')
 
 class PostList(ListView):
     model = Post
