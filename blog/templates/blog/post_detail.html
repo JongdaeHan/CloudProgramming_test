@@ -1,5 +1,5 @@
 {% extends 'blog/base.html' %}
-
+{% load crispy_forms_tags %}
 {% block title %}
     <title>Blog - {{ post.title }}</title>
 {% endblock %}
@@ -60,9 +60,11 @@
         <div class="card my-4">
           <h5 class="card-header">Leave a Comment:</h5>
           <div class="card-body">
-            <form>
+              <p>{{ post.get_absolute_url }}new_comment</p>
+            <form method="POST" action="{{ post.get_absolute_url }}new_comment/">
+                {% csrf_token %}
               <div class="form-group">
-                <textarea class="form-control" rows="3"></textarea>
+                  {{comment_form | crispy}}
               </div>
               <button type="submit" class="btn btn-primary">Submit</button>
             </form>
@@ -76,12 +78,12 @@
 {#          <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">#}
           <div class="media-body">
             <h5 class="mt-0">{{ comment.author }} :: {{ comment.created_at }}</h5>
-              <p> {{ comment.content }} </p>
+              <p> {{ comment.content | linebreaks }} </p>
           </div>
         </div>
             {% endfor %}
       {% endif %}
-        
+
 
       </div>
         {% endblock %}
