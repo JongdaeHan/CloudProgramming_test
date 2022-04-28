@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'single_page',
     'django.contrib.admin',
     'crispy_forms',
-    'markdownx'
+    'markdownx',
+
 ]
 
 MIDDLEWARE = [
