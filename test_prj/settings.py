@@ -40,9 +40,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+
     'crispy_forms',
     'markdownx',
-
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+#여기부터는 옵션
+    'allauth.socialaccount.providers.google',
 
 ]
 
@@ -141,6 +147,19 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 # MEDIA_ROOT = os.path.join(BASE_DIR, '_media')
-MEDIA_ROOT = '/var/vcap/media/'
+MEDIA_ROOT = '/app/vcap/media/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# Authentication
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend'
+)
+
+SITE_ID = 1
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+LOGIN_REDIRECT_URL='/blog/'
